@@ -1,9 +1,11 @@
-import sys
 import random
+import sys
+
 import names
-# from collections import Counter
 
 from student import Student
+
+# from collections import Counter
 
 students: list[Student] = []
 
@@ -40,18 +42,18 @@ def select_random_student_from_period(period: int) -> Student:
     students.remove(student)
     return student
 
+
 def number_students_in_period(period: int) -> int:
     # filter for students in the specified period
     subset = [student for student in students if student.period == period]
     return len(subset)
 
-def refill_students_list()-> None:
+
+def refill_students_list() -> None:
     students.clear()
     add_random_students(20, 6)  # 20 students in period 6
     add_random_students(12, 7)
     add_random_students(30, 8)
-
-
 
 
 def get_whole_number_in_range(prompt: str, minimum: int = 0, maximum: int = 10) -> int:
@@ -72,6 +74,7 @@ def get_whole_number_in_range(prompt: str, minimum: int = 0, maximum: int = 10) 
         except (TypeError, ValueError):
             print('Please enter a whole number')
 
+
 def main():
     refill_students_list()
 
@@ -80,7 +83,6 @@ def main():
     while number_students_in_period(period) > 0:
         student = select_random_student_from_period(period)
         print(student)
-
 
 
 if __name__ == '__main__':
