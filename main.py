@@ -49,11 +49,11 @@ def number_students_in_period(period: int) -> int:
     return len(subset)
 
 
-def refill_students_list() -> None:
+def refill_students_list(periods: list[int], minimum = 5, maximum = 25) -> None:
     students.clear()
-    add_random_students(20, 6)  # 20 students in period 6
-    add_random_students(12, 7)
-    add_random_students(30, 8)
+    for period in periods:
+        num_students = random.randint(minimum, maximum)
+        add_random_students(num_students, period)
 
 
 def get_whole_number_in_range(prompt: str, minimum: int = 0, maximum: int = 10) -> int:
@@ -76,7 +76,7 @@ def get_whole_number_in_range(prompt: str, minimum: int = 0, maximum: int = 10) 
 
 
 def main():
-    refill_students_list()
+    refill_students_list([6,7,8])
 
     period = get_whole_number_in_range('Which class period?', minimum = 6, maximum = 8)
 
