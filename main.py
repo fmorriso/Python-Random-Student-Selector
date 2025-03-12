@@ -82,6 +82,9 @@ def main():
 
     while number_students_in_period(period) > 0:
         student = select_random_student_from_period(period)
+        print(student.to_json())
+        json = student.to_json()
+        student = Student.from_json(json)
         print(student)
 
 
