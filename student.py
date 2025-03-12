@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 from dataclasses_json import dataclass_json
@@ -9,4 +9,5 @@ class Student():
     last_name: str
     first_name: str
     period: int
-    absent: Optional[bool] = False
+    absent: Optional[bool] = field(default=False)
+
