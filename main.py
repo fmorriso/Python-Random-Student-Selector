@@ -1,5 +1,6 @@
 import random
 import sys
+import csv
 
 import names
 
@@ -21,21 +22,27 @@ def add_random_students(num: int, period: int) -> None:
     :param num: The number of students desired
     :param period: The class period to associate with each generated student
     """
-    for i in range(num):
-        last_name = names.get_last_name()
-        # try for an even number of males and females
-        if i % 2 == 0:
-            first_name = names.get_first_name(gender = 'male')
-        else:
-            first_name = names.get_first_name(gender = 'female')
-        s = Student(first_name, last_name, period)
-        # print(f'{s}')
-        students.append(s)
+    filename = f'period{period}_roster.csv'
+    with open(filename, 'w', newline='') as f:
+        writer = csv.writer(f)
+        for i in range(num):
+            last_name = names.get_last_name()
+            # try for an even number of males and females
+            if i % 2 == 0:
+                first_name = names.get_first_name(gender = 'male')
+            else:
+                first_name = names.get_first_name(gender = 'female')
+
+            absent = random.choice([True, False, False, False, False, False, False])
+            s = Student(first_name, last_name, period, absent)
+            writer.writerow(s.__dict__.values())
+            # print(f'{s}')
+            students.append(s)
 
 
 def select_random_student_from_period(period: int) -> Student:
     # filter for students in the specified period
-    subset = [student for student in students if student.period == period]
+    subset = [student for student in students if student.period == period and not student.absent]
     # choose a random student from the subset of students
     student = random.choice(subset)
     # remove that student from the list
